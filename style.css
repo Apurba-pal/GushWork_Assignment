@@ -23,6 +23,31 @@ body{
     border-bottom:1px solid #ececec;
 }
 
+/* STICKY HEADER */
+
+/* The sticky bar sits above the normal header and slides in from top */
+.sticky-header{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:1000;
+    background:white;
+    border-bottom:1px solid #ececec;
+    box-shadow:0 2px 16px rgba(0,0,0,0.08);
+    transform:translateY(-100%);
+    transition:transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
+    opacity:0;
+    pointer-events:none;
+}
+
+/* When visible class is added via JS */
+.sticky-header.visible{
+    transform:translateY(0);
+    opacity:1;
+    pointer-events:auto;
+}
+
 .nav{
     height:72px;
     display:flex;
@@ -104,12 +129,58 @@ body{
     border-radius:18px;
     height:380px;
     background:white;
+    cursor:zoom-in;
 }
 
 .main-image{
     width:100%;
     height:100%;
     object-fit:cover;
+    transition:transform 0.4s ease;
+}
+
+/* ZOOM PREVIEW OVERLAY */
+
+/* The zoom lens that follows the cursor on the main image */
+.zoom-lens{
+    display:none;
+    position:absolute;
+    width:120px;
+    height:120px;
+    border:2px solid rgba(36,59,143,0.6);
+    border-radius:4px;
+    background:rgba(36,59,143,0.08);
+    pointer-events:none;
+    z-index:10;
+    transform:translate(-50%,-50%);
+}
+
+/* The large zoom result panel shown beside main image */
+.zoom-result{
+    display:none;
+    position:absolute;
+    top:0;
+    left:calc(100% + 18px);
+    width:340px;
+    height:380px;
+    border-radius:18px;
+    border:1px solid #ececec;
+    background-repeat:no-repeat;
+    background-color:white;
+    box-shadow:0 12px 40px rgba(0,0,0,0.12);
+    z-index:20;
+    overflow:hidden;
+}
+
+/* Keep zoom result inside viewport on smaller screens */
+@media(max-width:1200px){
+    .zoom-result{
+        left:auto;
+        right:0;
+        top:calc(100% + 12px);
+        width:100%;
+        height:280px;
+    }
 }
 
 .slider-btn{
@@ -148,7 +219,8 @@ body{
     overflow:hidden;
     background:white;
     border:2px solid transparent;
-    cursor:pointer;
+    cursor:zoom-in;
+    position:relative;
 }
 
 .thumb.active{
@@ -156,6 +228,28 @@ body{
 }
 
 .thumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform 0.3s ease;
+}
+
+/* Thumb zoom: a floating preview card above the thumbnails */
+.thumb-zoom-preview{
+    display:none;
+    position:fixed;
+    width:220px;
+    height:220px;
+    border-radius:14px;
+    overflow:hidden;
+    border:2px solid #ececec;
+    box-shadow:0 12px 40px rgba(0,0,0,0.18);
+    z-index:500;
+    pointer-events:none;
+    background:white;
+}
+
+.thumb-zoom-preview img{
     width:100%;
     height:100%;
     object-fit:cover;
@@ -1674,4 +1768,217 @@ body{
     .footer-grid {
         grid-template-columns: 1fr 1fr;
     }
+}
+
+
+/* ============================= */
+/* DATASHEET MODAL               */
+/* ============================= */
+
+/* Backdrop overlay */
+.modal-overlay{
+    display:none;               /* hidden by default */
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    /* smooth fade-in */
+    animation:modalFadeIn 0.25s ease forwards;
+}
+
+/* Show state toggled by JS */
+.modal-overlay.active{
+    display:flex;
+}
+
+/* Fade-in keyframe */
+@keyframes modalFadeIn{
+    from{ opacity:0; }
+    to  { opacity:1; }
+}
+
+/* Modal card */
+.modal-box{
+    background:white;
+    border-radius:16px;
+    padding:36px 32px 32px;
+    width:100%;
+    max-width:480px;
+    position:relative;
+    box-shadow:0 24px 60px rgba(0,0,0,0.18);
+    /* slight slide-up on open */
+    animation:modalSlideUp 0.28s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+@keyframes modalSlideUp{
+    from{ transform:translateY(24px); opacity:0; }
+    to  { transform:translateY(0);    opacity:1; }
+}
+
+/* Close (×) button */
+.modal-close{
+    position:absolute;
+    top:14px;
+    right:16px;
+    width:32px;
+    height:32px;
+    border:none;
+    background:transparent;
+    font-size:22px;
+    color:#6b7280;
+    cursor:pointer;
+    border-radius:6px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:background 0.2s, color 0.2s;
+}
+
+.modal-close:hover{
+    background:#f3f4f6;
+    color:#111827;
+}
+
+/* Title */
+.modal-title{
+    font-size:18px;
+    font-weight:700;
+    color:#111827;
+    margin-bottom:26px;
+    line-height:1.3;
+    padding-right:24px; /* avoid overlap with close btn */
+}
+
+/* Field wrapper */
+.modal-field{
+    margin-bottom:18px;
+}
+
+.modal-field label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    color:#374151;
+    margin-bottom:7px;
+}
+
+.modal-field .required{
+    color:#ef4444;
+    margin-left:2px;
+}
+
+.modal-field .optional{
+    color:#9ca3af;
+    font-weight:400;
+}
+
+.modal-field input{
+    width:100%;
+    height:46px;
+    border:1px solid #d1d5db;
+    border-radius:9px;
+    padding:0 14px;
+    font-size:14px;
+    color:#111827;
+    outline:none;
+    transition:border-color 0.2s, box-shadow 0.2s;
+    background:white;
+}
+
+.modal-field input:focus{
+    border-color:#243b8f;
+    box-shadow:0 0 0 3px rgba(36,59,143,0.1);
+}
+
+.modal-field input::placeholder{
+    color:#9ca3af;
+}
+
+/* Submit button */
+.modal-submit{
+    width:100%;
+    height:48px;
+    margin-top:8px;
+    background:#243b8f;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:background 0.2s, transform 0.15s;
+}
+
+.modal-submit:hover{
+    background:#1d3176;
+    transform:translateY(-1px);
+}
+
+.modal-submit:active{
+    transform:translateY(0);
+}
+
+/* Responsive */
+@media(max-width:540px){
+    .modal-box{
+        margin:0 16px;
+        padding:28px 20px 24px;
+    }
+
+    .modal-title{
+        font-size:16px;
+    }
+}
+
+
+/* ============================= */
+/* QUOTE MODAL EXTRAS            */
+/* ============================= */
+
+/* Phone row: country-code select + number input */
+.quote-phone{
+    display:flex;
+    gap:0;
+    border:1px solid #d1d5db;
+    border-radius:9px;
+    overflow:hidden;
+}
+
+.quote-phone select{
+    height:46px;
+    padding:0 10px;
+    border:none;
+    border-right:1px solid #d1d5db;
+    background:#f9fafb;
+    font-size:14px;
+    color:#374151;
+    cursor:pointer;
+    outline:none;
+    appearance:auto;
+    min-width:72px;
+}
+
+.quote-phone input{
+    flex:1;
+    height:46px;
+    border:none;
+    padding:0 14px;
+    font-size:14px;
+    color:#111827;
+    outline:none;
+    background:white;
+}
+
+.quote-phone input::placeholder{
+    color:#9ca3af;
+}
+
+/* Right-aligned submit for the quote modal */
+.quote-submit-right{
+    width:auto;
+    padding:0 28px;
+    margin-left:auto;
+    display:block;
 }

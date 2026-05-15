@@ -12,8 +12,33 @@
 
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
+  <!-- STICKY HEADER (appears on scroll past first fold) -->
+  <header class="sticky-header" id="stickyHeader">
+    <div class="container nav">
+
+      <div class="logo">
+        <div class="logo-top">MANGALAM</div>
+        <div class="logo-bottom">HDPE PIPES</div>
+      </div>
+
+      <nav class="menu">
+        <a href="#">About Us</a>
+
+        <div class="dropdown">
+          <a href="#">
+            Products
+            <span>▾</span>
+          </a>
+        </div>
+
+        <a href="#" class="contact-btn">Contact Us</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- MAIN HEADER -->
+  <header class="header" id="mainHeader">
     <div class="container nav">
 
       <div class="logo">
@@ -52,7 +77,7 @@
         <!-- LEFT -->
         <div class="gallery">
 
-          <div class="main-image-wrapper">
+          <div class="main-image-wrapper" id="mainImageWrapper">
 
             <button class="slider-btn left">&#10094;</button>
 
@@ -63,11 +88,22 @@
               class="main-image"
             />
 
+            <!-- Zoom lens follows the mouse over the main image -->
+            <div class="zoom-lens" id="zoomLens"></div>
+
             <button class="slider-btn right">&#10095;</button>
 
           </div>
 
+          <!-- Zoom result panel shown beside/below the main image -->
+          <div class="zoom-result" id="zoomResult"></div>
+
           <!-- thumbnails -->
+          <!-- Floating zoom preview card shown when hovering over thumbnails -->
+          <div class="thumb-zoom-preview" id="thumbZoomPreview">
+            <img id="thumbZoomImg" src="" alt="zoom preview" />
+          </div>
+
           <div class="thumbs">
 
             <div class="thumb active">
@@ -171,7 +207,7 @@
           <!-- buttons -->
           <div class="buttons">
 
-            <button class="primary-btn">
+            <button class="primary-btn" data-modal="quote">
               Get Custom Quote
             </button>
 
@@ -318,7 +354,7 @@
 
       <div class="datasheet-btn-wrapper">
 
-        <button class="datasheet-btn">
+        <button class="datasheet-btn" id="datasheetBtn">
           ⬇ Download Full Technical Datasheet
         </button>
 
@@ -327,6 +363,116 @@
     </div>
 
   </section>
+
+  <!-- DATASHEET MODAL -->
+  <div class="modal-overlay" id="datasheetModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+    <div class="modal-box">
+
+      <!-- close button -->
+      <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+
+      <!-- title -->
+      <h3 class="modal-title" id="modalTitle">
+        Let us email the entire catalogue to you
+      </h3>
+
+      <!-- email field -->
+      <div class="modal-field">
+        <label for="modalEmail">Your Email <span class="required">*</span></label>
+        <input
+          type="email"
+          id="modalEmail"
+          placeholder="example@gmail.com"
+          required
+        />
+      </div>
+
+      <!-- contact field -->
+      <div class="modal-field">
+        <label for="modalContact">Your Contact <span class="optional">(Optional)</span></label>
+        <input
+          type="tel"
+          id="modalContact"
+          placeholder="+91- 0000000000"
+        />
+      </div>
+
+      <!-- submit -->
+      <button class="modal-submit" id="modalSubmit">
+        Download Brochure
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- REQUEST A QUOTE MODAL -->
+  <div class="modal-overlay" id="quoteModal" role="dialog" aria-modal="true" aria-labelledby="quoteModalTitle">
+
+    <div class="modal-box">
+
+      <!-- close button -->
+      <button class="modal-close" id="quoteModalClose" aria-label="Close">&times;</button>
+
+      <!-- title -->
+      <h3 class="modal-title" id="quoteModalTitle">Request a call back</h3>
+
+      <!-- Full Name -->
+      <div class="modal-field">
+        <input
+          type="text"
+          id="quoteName"
+          placeholder="Full Name"
+          required
+        />
+      </div>
+
+      <!-- Company Name -->
+      <div class="modal-field">
+        <input
+          type="text"
+          id="quoteCompany"
+          placeholder="Company Name"
+        />
+      </div>
+
+      <!-- Email Address -->
+      <div class="modal-field">
+        <input
+          type="email"
+          id="quoteEmail"
+          placeholder="Email Address"
+          required
+        />
+      </div>
+
+      <!-- Phone with country code -->
+      <div class="modal-field">
+        <div class="quote-phone">
+          <select id="quoteCountryCode">
+            <option value="+91">+91</option>
+            <option value="+1">+1</option>
+            <option value="+44">+44</option>
+            <option value="+61">+61</option>
+            <option value="+971">+971</option>
+          </select>
+          <input
+            type="tel"
+            id="quotePhone"
+            placeholder="7003026816"
+          />
+        </div>
+      </div>
+
+      <!-- submit -->
+      <button class="modal-submit quote-submit-right" id="quoteSubmit">
+        Submit Form
+      </button>
+
+    </div>
+
+  </div>
 
   <!-- FEATURES SECTION -->
 
@@ -466,7 +612,7 @@
 
     <div class="feature-btn-wrapper">
 
-      <button class="feature-btn">
+      <button class="feature-btn" data-modal="quote">
         Request a Quote
       </button>
 
