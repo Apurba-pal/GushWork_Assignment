@@ -4,16 +4,53 @@
     box-sizing:border-box;
 }
 
+/* ============================= */
+/* DESIGN SYSTEM TOKENS          */
+/* ============================= */
+
+:root{
+    --max-w:  1240px; /* max content width — prevents distortion on wide screens */
+    --pad-v:  100px;  /* section vertical padding (top & bottom) */
+    --pad-h:  100px;  /* container horizontal padding (left & right gutters) */
+}
+
+/* 1200px breakpoint */
+@media(max-width:1200px){
+    :root{ --pad-v:80px; --pad-h:80px; }
+}
+
+/* 1080px breakpoint */
+@media(max-width:1080px){
+    :root{ --pad-v:80px; --pad-h:60px; }
+}
+
+/* 800px breakpoint */
+@media(max-width:800px){
+    :root{ --pad-v:80px; --pad-h:48px; }
+}
+
+/* 360px breakpoint */
+@media(max-width:360px){
+    :root{ --pad-v:48px; --pad-h:16px; }
+}
+
 body{
     font-family:'Inter',sans-serif;
     background:#f7f7f7;
     color:#111827;
 }
 
+/* ============================= */
+/* UNIFIED CONTAINER             */
+/* All content sections share this — max 1240px, centred, responsive gutters */
+/* ============================= */
+
 .container{
-    width:1180px;
-    max-width:95%;
-    margin:auto;
+    max-width:var(--max-w);
+    width:100%;
+    margin:0 auto;
+    padding-left:var(--pad-h);
+    padding-right:var(--pad-h);
 }
 
 /* HEADER */
@@ -93,6 +130,36 @@ body{
     padding:11px 18px;
     border-radius:8px;
     font-weight:600;
+}
+
+/* Logo image style for header, sticky header, and footer */
+.logo-img {
+  max-width: 160px;
+  height: 48px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  padding: 4px 0;
+}
+
+/* Footer logo can be a bit larger and centered */
+.footer-logo-img {
+  max-width: 200px;
+  height: 56px;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Responsive adjustments for logo */
+@media (max-width: 600px) {
+  .logo-img {
+    max-width: 120px;
+    height: 36px;
+  }
+  .footer-logo-img {
+    max-width: 140px;
+    height: 40px;
+  }
 }
 
 /* MAIN */
@@ -492,15 +559,17 @@ body{
 /* ============================= */
 
 .tech-section{
-    margin-top:90px;
+    margin-top:var(--pad-v);
     background:#071327;
-    padding:90px 0;
+    padding:var(--pad-v) 0;
 }
 
 .tech-container{
-    width:1180px;
-    max-width:92%;
-    margin:auto;
+    max-width:var(--max-w);
+    width:100%;
+    margin:0 auto;
+    padding-left:var(--pad-h);
+    padding-right:var(--pad-h);
 }
 
 .tech-section h2{
@@ -583,13 +652,9 @@ body{
     color:#071327;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE — padding is now handled by --pad-v / --pad-h tokens */
 
 @media(max-width:768px){
-
-    .tech-section{
-        padding:60px 0;
-    }
 
     .tech-section h2{
         font-size:32px;
@@ -611,13 +676,15 @@ body{
 
 .features-section{
     background:#f6f6f6;
-    padding:90px 0 100px;
+    padding:var(--pad-v) 0;
 }
 
 .features-container{
-    width:1180px;
-    max-width:92%;
-    margin:auto;
+    max-width:var(--max-w);
+    width:100%;
+    margin:0 auto;
+    padding-left:var(--pad-h);
+    padding-right:var(--pad-h);
 }
 
 /* heading */
@@ -714,7 +781,7 @@ body{
     background:#1d3176;
 }
 
-/* responsive */
+/* RESPONSIVE — padding handled by tokens */
 
 @media(max-width:992px){
 
@@ -728,10 +795,6 @@ body{
 }
 
 @media(max-width:768px){
-
-    .features-section{
-        padding:70px 0;
-    }
 
     .feature-grid{
         grid-template-columns:1fr;
@@ -753,13 +816,15 @@ body{
 
 .faq-section{
     background:#f7f7f7;
-    padding:90px 0 110px;
+    padding:var(--pad-v) 0;
 }
 
 .faq-container{
-    width:1180px;
-    max-width:92%;
-    margin:auto;
+    max-width:var(--max-w);
+    width:100%;
+    margin:0 auto;
+    padding-left:var(--pad-h);
+    padding-right:var(--pad-h);
 }
 
 /* heading */
@@ -904,7 +969,7 @@ body{
     background:#1d3176;
 }
 
-/* responsive */
+/* RESPONSIVE — padding handled by tokens */
 
 @media(max-width:992px){
 
@@ -920,10 +985,6 @@ body{
 }
 
 @media(max-width:768px){
-
-    .faq-section{
-        padding:70px 0;
-    }
 
     .faq-heading h2{
         font-size:34px;
@@ -958,14 +1019,16 @@ body{
 
 .applications-section{
     background:#f7f7f7;
-    padding:90px 0 110px;
+    padding:var(--pad-v) 0;
     overflow:hidden;
 }
 
 .applications-container{
-    width:1180px;
-    max-width:92%;
-    margin:auto;
+    max-width:var(--max-w);
+    width:100%;
+    margin:0 auto;
+    padding-left:var(--pad-h);
+    padding-right:var(--pad-h);
 }
 
 /* top */
@@ -1081,7 +1144,7 @@ body{
     line-height:1.8;
 }
 
-/* responsive */
+/* RESPONSIVE — padding handled by tokens */
 
 @media(max-width:992px){
 
@@ -1096,10 +1159,6 @@ body{
 }
 
 @media(max-width:768px){
-
-    .applications-section{
-        padding:70px 0;
-    }
 
     .applications-top{
         flex-direction:column;
@@ -1134,13 +1193,15 @@ body{
 
 .process-section{
     background:#f7f7f7;
-    padding:90px 0 110px;
+    padding:var(--pad-v) 0;
 }
 
 .process-container{
-    width:1180px;
-    max-width:92%;
-    margin:auto;
+    max-width:var(--max-w);
+    width:100%;
+    margin:0 auto;
+    padding-left:var(--pad-h);
+    padding-right:var(--pad-h);
 }
 
 /* heading */
@@ -1295,7 +1356,7 @@ body{
     right:18px;
 }
 
-/* responsive */
+/* RESPONSIVE — padding handled by tokens */
 
 @media(max-width:992px){
 
@@ -1309,10 +1370,6 @@ body{
 }
 
 @media(max-width:768px){
-
-    .process-section{
-        padding:70px 0;
-    }
 
     .process-heading h2{
         font-size:34px;
@@ -1362,7 +1419,7 @@ body{
 
 /* TESTIMONIALS */
 .testimonials-section {
-    padding: 100px 0;
+    padding: var(--pad-v) 0;
     background-color: #fcfcfc;
 }
 
@@ -1427,7 +1484,7 @@ body{
 
 /* PORTFOLIO */
 .portfolio-section {
-    padding: 100px 0;
+    padding: var(--pad-v) 0;
     background-color: #f7f7f7;
 }
 
@@ -1547,7 +1604,7 @@ body{
 
 /* RESOURCES SECTION */
 .resources-section {
-    padding: 80px 0;
+    padding: var(--pad-v) 0;
     background-color: #f9fafb;
 }
 
@@ -1591,7 +1648,7 @@ body{
 
 /* CONTACT CTA SECTION */
 .contact-cta-section {
-    padding: 100px 0;
+    padding: var(--pad-v) 0;
 }
 
 .cta-blue-box {
