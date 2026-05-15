@@ -343,23 +343,12 @@ body{
     color:#6b7280;
 }
 
-.dot{
-    width:8px;
-    height:8px;
-    border-radius:50%;
+.badge-icon{
+    width:24px;
+    height:24px;
+    object-fit:contain;
 }
 
-.blue{
-    background:#2563eb;
-}
-
-.gray{
-    background:#9ca3af;
-}
-
-.dark{
-    background:#111827;
-}
 
 .product-info h1{
     font-size:50px;
