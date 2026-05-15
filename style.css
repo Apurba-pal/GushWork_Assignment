@@ -519,7 +519,7 @@ body{
 @media(max-width:1000px){
 
     .product-layout{
-        flex-direction:column;
+        flex-direction:column-reverse;
     }
 
     .gallery{
