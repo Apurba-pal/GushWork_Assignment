@@ -4,9 +4,9 @@
     box-sizing:border-box;
 }
 
-/* ============================= */
-/* DESIGN SYSTEM TOKENS          */
-/* ============================= */
+
+ /* DESIGN SYSTEM TOKENS           */
+
 
 :root{
     --max-w:  1240px; /* max content width — prevents distortion on wide screens */
@@ -40,10 +40,10 @@ body{
     color:#111827;
 }
 
-/* ============================= */
+
 /* UNIFIED CONTAINER             */
 /* All content sections share this — max 1240px, centred, responsive gutters */
-/* ============================= */
+
 
 .container{
     max-width:var(--max-w);
@@ -554,9 +554,9 @@ body{
     }
 }
 
-/* ============================= */
+
 /* TECHNICAL SPECIFICATIONS */
-/* ============================= */
+
 
 .tech-section{
     margin-top:var(--pad-v);
@@ -670,9 +670,9 @@ body{
     }
 }
 
-/* ============================= */
+
 /* FEATURES SECTION */
-/* ============================= */
+
 
 .features-section{
     background:#f6f6f6;
@@ -810,9 +810,9 @@ body{
 }
 
 
-/* ============================= */
+
 /* FAQ SECTION */
-/* ============================= */
+
 
 .faq-section{
     background:#f7f7f7;
@@ -1013,9 +1013,9 @@ body{
     }
 }
 
-/* ============================= */
+
 /* APPLICATIONS SECTION */
-/* ============================= */
+
 
 .applications-section{
     background:#f7f7f7;
@@ -1187,9 +1187,9 @@ body{
 }
 
 
-/* ============================= */
+
 /* PROCESS SECTION */
-/* ============================= */
+
 
 .process-section{
     background:#f7f7f7;
@@ -1828,9 +1828,9 @@ body{
 }
 
 
-/* ============================= */
+
 /* DATASHEET MODAL               */
-/* ============================= */
+
 
 /* Backdrop overlay */
 .modal-overlay{
@@ -1990,9 +1990,9 @@ body{
 }
 
 
-/* ============================= */
+
 /* QUOTE MODAL EXTRAS            */
-/* ============================= */
+
 
 /* Phone row: country-code select + number input */
 .quote-phone{
